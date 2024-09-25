@@ -5,7 +5,13 @@ class Animal {
 	}
 
 	caminar() {
-		console.log(`${this.nombre} esta caminando con sus ${this.patas} patas`)
+		let plural = this.patas > 1 ? 's' : ''
+		let msg = ''
+		msg = `${this.nombre} esta caminando con su`
+		msg	+= plural
+		msg += this.patas == 1 ? ' pata de palo' : ` ${this.patas} patas`
+
+		console.log(msg)
 	}
 
 	hablar() {
@@ -79,9 +85,11 @@ let habitantes = [
 	new Sobrino("Jaimito", "azul"),
 ]
 
-habitantes[3].amputar()
+habitantes.forEach( habitante => {
+	if (habitante.nombre == "Pete") {
+		habitante.amputar()
+	}
 
-habitantes.forEach( sobrino => {
-	sobrino.caminar()
-	sobrino.hablar()
+	habitante.caminar()
+	habitante.hablar()
 })
