@@ -1,3 +1,9 @@
+class Cola {
+    mover() {
+        console.log("mueve la colita")
+    }
+}
+
 class Animal {
     constructor(nombre) {
         this.nombre = nombre || "Animalito" 
@@ -7,8 +13,7 @@ class Animal {
     caminar() {
         let plural = this.patas > 1 ? 's' : ''
         let msg = ''
-        msg = `${this.nombre} esta caminando con su`
-        msg += plural
+        msg = `${this.nombre} esta caminando con su` + plural
         msg += this.patas == 1 ? ' pata de palo' : ` ${this.patas} patas`
 
         console.log(msg)
@@ -26,6 +31,7 @@ class Animal {
 class Perro extends Animal {
     constructor(nombre) {
         super(nombre || "Perro")
+        this.cola = new Cola()
     }
 
     hablar() {
@@ -44,6 +50,7 @@ class Pato extends Animal {
         this.alas = 2
         this.plumas = 1000
         this.color = "blanco"
+        this.cola = new Cola()
     }
 
     nadar() {
@@ -73,23 +80,56 @@ class Sobrino extends Pato{
     }
 }
 
-let habitantes = [
-    new Animal(),
-    new Pato("Pepito", "naranja"),
-    new Pato(),
-    new Perro("Pete"),
-    new Pato(),
-    new Perro(),
-    new Sobrino("Juanito", "rojo"),
-    new Sobrino("Jorgito", "verde"),
-    new Sobrino("Jaimito", "azul"),
-]
+class Patoburgo {
+    constructor() {
+        this.habitantes = []
+        this.contador = 0
 
-habitantes.forEach( habitante => {
-    if (habitante.nombre == "Pete") {
-        habitante.amputar()
+        let registra = [
+            // new Animal(),
+            new Pato("Pepito", "naranja"),
+            new Pato(),
+            new Perro("Pete"),
+            new Pato(),
+            new Perro(),
+            new Sobrino("Juanito", "rojo"),
+            new Sobrino("Jorgito", "verde"),
+            new Sobrino("Jaimito", "azul"),
+        ]
+
+        registra.forEach(habitante => this.empadronar(habitante))
     }
 
-    habitante.caminar()
-    habitante.hablar()
-})
+    empadronar(habitante) {
+        this.contador++
+        this.habitantes.push(habitante)
+    }
+
+    visitar() {
+
+        console.log(`Hay ${this.contador} animales en Patoburgo:\n`)
+
+        this.habitantes.forEach( habitante => {
+            if (habitante.nombre == "Pete") {
+                habitante.amputar()
+            }
+
+            if(habitante instanceof Animal){
+                habitante.caminar()
+                habitante.hablar()
+            }
+
+            if(habitante instanceof Perro){
+                habitante.ladrar()
+            }
+
+            if(habitante instanceof Sobrino){
+                habitante.observar()
+            }
+
+            console.log('  --- ')
+        })
+    }
+}
+
+(new Patoburgo()).visitar()
