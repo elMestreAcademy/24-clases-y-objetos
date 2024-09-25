@@ -7,7 +7,8 @@ class Rectangulo {
 
   describete() {
 
-    var msg = `El rectangulo es de ${this.alto}${this.unidad} x ${this.ancho}${this.unidad}`
+    var msg = ""
+    msg += `El rectangulo es de ${this.alto}${this.unidad} x ${this.ancho}${this.unidad}`
     msg += `, el área es de ${this.area()}${this.unidad}²`
 
     console.log(msg);
@@ -16,20 +17,18 @@ class Rectangulo {
   area() {
     return this.alto * this.ancho
   }
-
-  crece() {
-    this.alto += 1
-    this.ancho++
-  }
 }
 
-const rectangulos = [
-  new Rectangulo(4, 3),
-  new Rectangulo(5, 8),
-  new Rectangulo(6, 10),
-];
+function ladoAleatorio(max = 10) {
+  return Math.floor(Math.random() * (max) + 1)
+}
 
-rectangulos.forEach(rectangulo => rectangulo.describete())
+var rectangulos = []
+for (var i = 10000; i >= 0; i--) {
+  rectangulos.push(
+    new Rectangulo(ladoAleatorio(), ladoAleatorio()))
+}
 
-// 1 - Para cada rectangulo, se va a calcular el area 
-// 2 - Lista de 1000 rectanguilos aleatorios de lados entre 1 y 10
+rectangulos.forEach(
+  rectangulo => rectangulo.describete()
+)
