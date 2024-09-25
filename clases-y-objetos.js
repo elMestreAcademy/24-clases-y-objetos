@@ -1,13 +1,20 @@
 class Rectangulo {
   constructor(alto, ancho) {
-    var patata = "patata";
-
+    this.unidad = "m"
     this.alto = alto;
     this.ancho = ancho;
   }
 
   describete() {
-    console.log(`El rectangulo es de ${this.alto} x ${this.ancho}`);
+
+    var msg = `El rectangulo es de ${this.alto}${this.unidad} x ${this.ancho}${this.unidad}`
+    msg += `, el área es de ${this.area()}${this.unidad}²`
+
+    console.log(msg);
+  }
+
+  area() {
+    return this.alto * this.ancho
   }
 
   crece() {
